@@ -1,40 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body {text-align: center;}
+        button {
+            height: 100px;
+            width: 200px;
+        }
+        p {
+            text-align: center;
+        }
+        #computerchoice {
+            position: relative;
+            top: 80px;
+        }
+        #vs {
+            position: relative;
+            top: 100px;
+        }
+        #playerscore {
+            position: absolute;
+            
+            left: 180px;
+        }
+        #computerscore {
+            position: absolute;
+            
+            right: 180px;
+        }
+        #buttons{
+            position: relative;
+            top: 120px;
+        }
+        #message{
+            position: relative;
+            top: 130px;
+        }
+
+    </style>
+    <body>
+        <h1>Rock-Paper-Scissors!</h1>
+        <h2>
+            Have fun playing rock-paper-scissors against the computer!
+        </h2>
+        <div id="computerchoice">
+            <p>Computer Selection</p>
+        </div>
+        <div id="vs">
+            vs
+        </div>
+        <div id="playerscore">
+            Player Score:
+        </div>
+        <div id= "computerscore">
+            Computer Score:
+        </div>
+        <div id="buttons">
+            <button id="rockbutton">Rock!</button>
+            <button id="paperbutton">Paper!</button>
+            <button id="scissorsbutton">Scissors!</button>
+        </div>
+        <div id="message">
+        </div>
+    </body>
+</html>
+
+
 <script>
 
+    var playerscore = 0;
+    var computerscore = 0;
     var options = ["rock", "paper", "scissors"];
 
+    var playerscoretext = document.querySelector("#playerscore");
+    var computerscoretext = document.querySelector("#computerscore");
+    var playerscorenumber = document.createElement("p");
+    var computerscorenumber = document.createElement("p");
+
+    var computerchoice = document.querySelector("#computerchoice");
+    var scissorbutton = document.querySelector("#scissorsbutton");
+    var rockbutton = document.querySelector("#rockbutton");
+    var paperbutton = document.querySelector("#paperbutton");
+    var message = document.querySelector("#message");
+
+    playerscorenumber.textContent = "0";
+    computerscorenumber.textContent = "0";
+    playerscoretext.appendChild(playerscorenumber);
+    computerscoretext.appendChild(computerscorenumber);
+
+
+    rockbutton.addEventListener('click', () => {
+        var computerSelection = options[Math.floor(Math.random() * 3)];
+        computerchoice.textContent = computerSelection.toUpperCase();
+        message.textContent = playRound(computerSelection, "rock");
+        playerscorenumber.textContent = playerscore;
+        computerscorenumber.textContent = computerscore;
+    });
+    paperbutton.addEventListener('click', () => {
+        var computerSelection = options[Math.floor(Math.random() * 3)];
+        computerchoice.textContent = computerSelection.toUpperCase();
+        message.textContent = playRound(computerSelection, "paper");
+        playerscorenumber.textContent = playerscore;
+        computerscorenumber.textContent = computerscore;
+    });
+    scissorbutton.addEventListener('click', () => {
+        var computerSelection = options[Math.floor(Math.random() * 3)];
+        computerchoice.textContent = computerSelection.toUpperCase();
+        message.textContent = playRound(computerSelection, "scissors");
+        playerscorenumber.textContent = playerscore;
+        computerscorenumber.textContent = computerscore;
+    });
+
+
+
     function playRound(computerSelection, playerSelection){
-        var player = playerSelection.toLowerCase();
-        switch(player){
+        switch(playerSelection){
             case "rock":
                  switch(computerSelection){
                     case "rock":
                         return "You Tie! Rock ties Rock";
                         break;
                     case "scissors":
+                         playerscore++;
                         return "You Win! Rock beats Scissors";
                         break;
                     default:
+                        computerscore++;
                         return "You Lose! Paper beats Rock";
                     }
                 break;
             case "scissors":
-                switch(computerSelection){
+                 switch(computerSelection){
                     case "rock":
                         return "You Lose! Rock beats Scissors";
                         break;
                     case "scissors":
-                        return "You Tie! Scissors ties Scissors";
+                         playerscore++;
+                        return "You Tie! Scissors tie Scissors";
                         break;
                     default:
-                        return "You Win! Scissors beats Scissors";
+                        computerscore++;
+                        return "You Win! Scissors beat Paper";
                     }
                 break;
             case "paper":
             switch(computerSelection){
                     case "rock":
+                        playerscore++;
                         return "You Win! Paper beats Rock";
                         break;
                     case "scissors":
+                        computerscore++;
                         return "You Lose! Scissors beats Paper";
                         break;
                     default:
@@ -44,11 +159,7 @@
             default:
                 return "Invalid Selection";
         }
+        
     }
 
-    function game(){
-        for(i = 0; i < 5; i++){
-            console.log(playRound(options[Math.floor(Math.random() * 3)], window.prompt("Enter one of: rock, paper, scissors")));
-        }
-    }
 </script>
