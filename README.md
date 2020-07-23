@@ -1,2 +1,2 @@
 # rockpaperscissors
-View as a webpage:
+https://johnfchapman.github.io/rockpaperscissors/
