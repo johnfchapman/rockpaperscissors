@@ -1,0 +1,54 @@
+<script>
+
+    var options = ["rock", "paper", "scissors"];
+
+    function playRound(computerSelection, playerSelection){
+        var player = playerSelection.toLowerCase();
+        switch(player){
+            case "rock":
+                 switch(computerSelection){
+                    case "rock":
+                        return "You Tie! Rock ties Rock";
+                        break;
+                    case "scissors":
+                        return "You Win! Rock beats Scissors";
+                        break;
+                    default:
+                        return "You Lose! Paper beats Rock";
+                    }
+                break;
+            case "scissors":
+                switch(computerSelection){
+                    case "rock":
+                        return "You Lose! Rock beats Scissors";
+                        break;
+                    case "scissors":
+                        return "You Tie! Scissors ties Scissors";
+                        break;
+                    default:
+                        return "You Win! Scissors beats Scissors";
+                    }
+                break;
+            case "paper":
+            switch(computerSelection){
+                    case "rock":
+                        return "You Win! Paper beats Rock";
+                        break;
+                    case "scissors":
+                        return "You Lose! Scissors beats Paper";
+                        break;
+                    default:
+                        return "You Tie! Paper ties Paper";
+                    }
+                break;
+            default:
+                return "Invalid Selection";
+        }
+    }
+
+    function game(){
+        for(i = 0; i < 5; i++){
+            playRound(options[Math.floor(Math.random() * 3)], window.prompt("Enter one of: rock, paper, scissors"));
+        }
+    }
+</script>
